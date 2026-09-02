@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cinco meses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,400;1,9..144,600&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #33202f;
+    --bg-deep: #241521;
+    --paper: #f8ecdf;
+    --gold: #d9ad6a;
+    --rose: #e0919c;
+    --rose-deep: #c46b7a;
+    --cream: #f5e9df;
+    --mauve: #ac8ba8;
+    --ink: #33202f;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  body{
+    background: radial-gradient(ellipse at top, var(--bg) 0%, var(--bg-deep) 70%);
+    color: var(--cream);
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  .stars{
+    position: fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, rgba(244,233,220,.5), transparent),
+      radial-gradient(1px 1px at 70% 15%, rgba(244,233,220,.4), transparent),
+      radial-gradient(1px 1px at 40% 70%, rgba(244,233,220,.35), transparent),
+      radial-gradient(1.5px 1.5px at 85% 60%, rgba(201,161,90,.5), transparent),
+      radial-gradient(1px 1px at 10% 85%, rgba(244,233,220,.3), transparent),
+      radial-gradient(1px 1px at 60% 45%, rgba(244,233,220,.4), transparent);
+    background-size: 100% 100%;
+  }
+
+  .intro{
+    position: fixed; inset:0; z-index: 50;
+    background: var(--bg-deep);
+    display:flex; align-items:center; justify-content:center;
+    animation: intro-out .9s ease forwards;
+    animation-delay: 2.15s;
+  }
+  .intro-heart path{
+    fill: none;
+    stroke: var(--rose);
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 340;
+    stroke-dashoffset: 340;
+    transform-origin: 50% 55%;
+    filter: drop-shadow(0 0 10px rgba(224,145,156,.5));
+    animation:
+      draw-heart 1.3s ease forwards,
+      fill-heart .5s ease forwards 1.25s,
+      pulse-heart .5s ease forwards 1.75s;
+  }
+  @keyframes draw-heart{ to{ stroke-dashoffset: 0; } }
+  @keyframes fill-heart{ to{ fill: var(--rose); } }
+  @keyframes pulse-heart{ 0%{ transform:scale(1); } 55%{ transform:scale(1.1); } 100%{ transform:scale(1); } }
+  @keyframes intro-out{ to{ opacity:0; visibility:hidden; } }
+
+  .contenido{ opacity:0; transform: translateY(10px); animation: contenido-in 1s ease forwards; animation-delay: 2.35s; }
+  @keyframes contenido-in{ to{ opacity:1; transform:translateY(0); } }
+
+  .floating-hearts{ position: fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none; }
+  .floating-hearts span{
+    position:absolute; bottom:-8%;
+    font-size: 1rem;
+    color: var(--rose);
+    opacity:0;
+    animation: float-up 16s linear infinite;
+  }
+  @keyframes float-up{
+    0%{ transform: translateY(0) scale(.75); opacity:0; }
+    12%{ opacity:.32; }
+    88%{ opacity:.18; }
+    100%{ transform: translateY(-108vh) scale(1.05); opacity:0; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .intro{ display:none; }
+    .contenido{ opacity:1; transform:none; animation:none; }
+    .floating-hearts{ display:none; }
+  }
+
+  main{ position:relative; z-index:1; max-width: 920px; margin:0 auto; padding: 8vh 6vw 12vh; }
+
+  .hero{ text-align:center; padding-bottom: 9vh; position: relative; }
+
+  .hero::before{
+    content:'';
+    position:absolute;
+    top:-12%; left:50%; transform:translateX(-50%);
+    width:380px; height:380px;
+    background: radial-gradient(circle, rgba(224,145,156,.32), transparent 68%);
+    filter: blur(38px);
+    z-index:-1;
+    pointer-events:none;
+  }
+
+  .eyebrow{
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    color: var(--rose);
+    margin-bottom: 1.4rem;
+    font-weight: 400;
+  }
+
+  h1{
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(2.8rem, 9vw, 5.2rem);
+    color: var(--paper);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+
+  .hero p{
+    max-width: 46ch;
+    margin: 1.8rem auto 0;
+    color: var(--mauve);
+    font-size: 1.05rem;
+  }
+
+  .carta{
+    max-width: 58ch;
+    margin: 0 auto 11vh;
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 1.18rem;
+    color: var(--cream);
+  }
+  .carta p{ margin-bottom: 1.3rem; }
+  .carta .firma{
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--gold);
+    margin-top: 2rem;
+  }
+
+  .seccion-titulo{
+    text-align:center;
+    font-family:'Fraunces', serif;
+    font-style: italic;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    color: var(--paper);
+    margin-bottom: 4.5rem;
+  }
+
+  .pared{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.2rem 1.6rem;
+  }
+
+  .sobre{
+    position: relative;
+    width: 210px;
+    cursor: pointer;
+    perspective: 1200px;
+  }
+  .sobre:nth-child(odd)  .tapa-cerrada{ transform: rotate(-2.5deg); }
+  .sobre:nth-child(even) .tapa-cerrada{ transform: rotate(2deg); }
+  .sobre:nth-child(3n)   .tapa-cerrada{ transform: rotate(-1deg); }
+
+  .tapa-cerrada{
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: 3px;
+    padding: 1.8rem 1.2rem 1.6rem;
+    box-shadow: 0 14px 26px -12px rgba(0,0,0,.55);
+    transition: transform .35s ease, box-shadow .35s ease;
+    text-align:center;
+  }
+  .sobre:hover .tapa-cerrada{
+    transform: translateY(-6px) rotate(0deg) !important;
+    box-shadow: 0 20px 34px -14px rgba(0,0,0,.6);
+  }
+
+  .sello{
+    width: 34px; height:34px;
+    margin: 0 auto 0.9rem;
+    border-radius: 50%;
+    background: var(--rose);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces', serif;
+    font-style: italic;
+    color: var(--paper);
+    font-size: 1rem;
+  }
+
+  .mes-label{
+    font-family:'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.25rem;
+    margin-bottom: 0.3rem;
+  }
+  .mes-sub{
+    font-size: 0.78rem;
+    color: #6b5866;
+    letter-spacing: .02em;
+  }
+
+  .sobre.futuro .tapa-cerrada{
+    background: transparent;
+    border: 1.5px dashed rgba(244,233,220,.35);
+    box-shadow: none;
+  }
+  .sobre.futuro .mes-label,
+  .sobre.futuro .mes-sub{ color: var(--mauve); }
+  .sobre.futuro .sello{
+    background: transparent;
+    border: 1.5px dashed rgba(244,233,220,.4);
+    color: var(--mauve);
+  }
+  .sobre.futuro:hover .tapa-cerrada{
+    transform: translateY(-3px) rotate(0deg) !important;
+  }
+
+  .overlay{
+    position: fixed; inset:0; z-index: 20;
+    background: rgba(15,8,17,.82);
+    backdrop-filter: blur(3px);
+    display:flex; align-items:center; justify-content:center;
+    padding: 6vw;
+    opacity:0; pointer-events:none;
+    transition: opacity .3s ease;
+  }
+  .overlay.activo{ opacity:1; pointer-events:auto; }
+
+  .tarjeta-abierta{
+    background: var(--paper);
+    color: var(--ink);
+    max-width: 480px; width:100%;
+    border-radius: 4px;
+    padding: 2.2rem 2rem 2rem;
+    position: relative;
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,.6);
+    transform: scale(.92);
+    transition: transform .3s ease;
+    max-height: 86vh;
+    overflow-y: auto;
+  }
+  .overlay.activo .tarjeta-abierta{ transform: scale(1); }
+
+  .cerrar{
+    position:absolute; top:0.9rem; right:1.1rem;
+    background:none; border:none; font-size:1.4rem;
+    color:#6b5866; cursor:pointer; line-height:1;
+  }
+
+  .tarjeta-abierta .mes-label{ font-size:1.5rem; margin-bottom: 1rem; }
+
+  .media-wrap{
+    width:100%;
+    border-radius: 3px;
+    overflow:hidden;
+    background: #ddd0c4;
+    margin-bottom: 0.8rem;
+    max-height: 60vh;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .media-wrap img, .media-wrap video{
+    width:100%; height:100%; max-height: 60vh; object-fit: contain; display:block;
+  }
+  .media-wrap.placeholder{
+    color:#a0907a; font-size:.85rem; font-family:'Work Sans',sans-serif; text-align:center; padding: 1rem;
+    aspect-ratio: 4/3;
+  }
+
+  .media-wrap.pdf-card{
+    aspect-ratio: auto;
+    padding: 1.6rem 1.2rem;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .media-wrap.pdf-card .pdf-icono{
+    font-size: 1.8rem;
+  }
+  .media-wrap.pdf-card a{
+    display:inline-block;
+    margin-top: 0.3rem;
+    padding: 0.55rem 1.3rem;
+    background: var(--rose-deep);
+    color: var(--paper);
+    text-decoration:none;
+    border-radius: 999px;
+    font-family:'Work Sans', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: .02em;
+    transition: background .2s ease;
+  }
+  .media-wrap.pdf-card a:hover{ background: var(--rose); }
+  .media-wrap.pdf-card span.pdf-nombre{
+    font-family:'Work Sans', sans-serif;
+    font-size: 0.8rem;
+    color:#6b5866;
+  }
+
+  .caption{ font-size: 0.98rem; color:#4a3d47; }
+
+  .cierre{
+    text-align:center;
+    margin-top: 12vh;
+    max-width: 50ch;
+    margin-left:auto; margin-right:auto;
+  }
+  .cierre p{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size: clamp(1.3rem, 3.4vw, 1.7rem);
+    color: var(--paper);
+    line-height: 1.5;
+  }
+  .cierre .firma-final{
+    margin-top: 1.6rem;
+    color: var(--gold);
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 480px){
+    .sobre{ width: 42vw; }
+    main{ padding: 10vh 6vw 10vh; }
+    .media-wrap, .media-wrap img, .media-wrap video{ max-height: 50vh; }
+  }
+</style>
+</head>
+<body>
+
+<div class="intro" id="intro">
+  <svg class="intro-heart" viewBox="0 0 100 90" width="86" height="86" aria-hidden="true">
+    <path d="M50 82 C 20 60, 2 40, 2 24 C 2 8, 16 2, 28 2 C 38 2, 46 8, 50 18 C 54 8, 62 2, 72 2 C 84 2, 98 8, 98 24 C 98 40, 80 60, 50 82 Z" />
+  </svg>
+</div>
+
+<div class="floating-hearts" aria-hidden="true">
+  <span style="left:6%; animation-delay:0s;">♥</span>
+  <span style="left:20%; animation-delay:4s;">♥</span>
+  <span style="left:36%; animation-delay:8s;">♥</span>
+  <span style="left:54%; animation-delay:2s;">♥</span>
+  <span style="left:70%; animation-delay:6s;">♥</span>
+  <span style="left:86%; animation-delay:10s;">♥</span>
+</div>
+
+<div class="stars"></div>
+
+<main class="contenido">
+
+  <section class="hero">
+    <div class="eyebrow">3 de septiembre</div>
+    <h1>5 meses juntos</h1>
+  </section>
+
+  <section class="carta">
+    <p>Stefi 🧡,</p>
+    <p>
+      Gracias por estos 5 meses eligiéndonos. Es hermoso compartir juntos, la paso demasiado bien y disfruto mucho.
+      Me encanta estar con vos y te elegiría mil veces más.
+    </p>
+    <p>
+      Te quiero mucho y no quiero que se pierdan todos los nuevos recuerdos, ni los que vienen, así que los puse acá.
+    </p>
+    <p>
+      <em>(PD: este mes viene con un nuevo recuerdo que todavía no pasó.)</em>
+    </p>
+  </section>
+
+  <section>
+    <p class="seccion-titulo">Cinco sobres, cinco meses</p>
+    <div class="pared" id="pared"></div>
+  </section>
+
+  <section class="cierre">
+    <div class="firma-final">Feliz 5° mes 🤎</div>
+  </section>
+
+</main>
+
+<div class="overlay" id="overlay">
+  <div class="tarjeta-abierta" id="tarjeta">
+    <button class="cerrar" id="cerrar">✕</button>
+    <div class="mes-label" id="modal-titulo"></div>
+    <div id="modal-media"></div>
+    <p class="caption" id="modal-caption"></p>
+  </div>
+</div>
+
+<script>
+/* ======================================================
+   PERSONALIZÁ ACÁ: un objeto por mes.
+   - titulo: lo que aparece en el sobre chico (ej "Abril")
+   - sub: texto chico debajo (ej "Mes 1")
+   - caption: el texto que aparece debajo de las fotos/videos al abrir
+   - media: una LISTA de fotos, videos y/o PDFs de ese mes. Cada item es:
+       { tipo: "imagen", src: "media/mes1a.jpg" }
+       { tipo: "video",  src: "media/mes1b.mp4" }
+       { tipo: "pdf",    src: "media/entradas.pdf", nombre: "Entradas.pdf" }
+   Para meses futuros (todavía sin contenido) usá:
+   { titulo: "Diciembre", sub: "Todavía no llega", futuro: true }
+   ====================================================== */
+  const meses = [
+    { titulo: "Abril",      sub: "Mes 1", caption: "Nuestros primeros desayunos y yo todavia estaba re tímido, no hay muchas fotos :(.",
+      media: [ { tipo: "imagen", src: "media/mes1.jpg" }, { tipo: "imagen", src: "media/mes1_2.jpg" }  ] },
+    { titulo: "Mayo",       sub: "Mes 2", caption: "primeros paseitos y fuimos a ver juntos tremenda peli.",
+      media: [ { tipo: "imagen", src: "media/mes2.jpg" }, { tipo: "imagen", src: "media/mes2_3.jpg" }, { tipo: "imagen", src: "media/mes2_2.jpg" } ] },
+    { titulo: "Junio",      sub: "Mes 3", caption: "Comimos tequeños, conocimos una casacada y mas paseitos.",
+       media: [ { tipo: "imagen", src: "media/mes3.jpg" }, { tipo: "imagen", src: "media/mes3_2.jpg" }, { tipo: "imagen", src: "media/mes3_3.jpg" }   ] },
+    { titulo: "Julio",      sub: "Mes 4", caption: "Mes de festejos y primera vez tocando juntos.",
+      media: [ { tipo: "imagen", src: "media/mes4.jpg" }, { tipo: "video", src: "media/mes4.mp4" }, { tipo: "imagen", src: "media/mes4_2.jpg" } , { tipo: "imagen", src: "media/mes4_3.jpg" }  ] },
+    { titulo: "Agosto",     sub: "Mes 5", caption: "Tacos en la playa, tremenda cachoeira y ya empezamos a sonar bien.",
+      media: [ { tipo: "imagen", src: "media/mes5.jpg" },  { tipo: "imagen", src: "media/mes5_4.jpg" }, { tipo: "video", src: "media/mes5.mp4" }, { tipo: "imagen", src: "media/mes5_2.jpg" } , { tipo: "imagen", src: "media/mes5_3.jpg" } , { tipo: "imagen", src: "media/mes5_5.jpg" } ] },
+    { titulo: "Septiembre", sub: "Este mes", caption: "Entradas para ir juntos 👀",
+      media: [ { tipo: "pdf", src: "media/entradas.pdf", nombre: "Entradas.pdf" } ] },
+    { titulo: "Octubre",   sub: "Todavía no llega", futuro: true },
+    { titulo: "Noviembre", sub: "Todavía no llega", futuro: true },
+    { titulo: "...", sub: "Ojala muchos mas", futuro: true },
+  ];
+
+  const pared = document.getElementById('pared');
+  const overlay = document.getElementById('overlay');
+  const modalTitulo = document.getElementById('modal-titulo');
+  const modalMedia = document.getElementById('modal-media');
+  const modalCaption = document.getElementById('modal-caption');
+
+  meses.forEach((m, i) => {
+    const sobre = document.createElement('div');
+    sobre.className = m.futuro ? 'sobre futuro' : 'sobre';
+    sobre.innerHTML = `
+      <div class="tapa-cerrada">
+        <div class="sello">${m.futuro ? '·' : '♥'}</div>
+        <div class="mes-label">${m.titulo}</div>
+        <div class="mes-sub">${m.sub}</div>
+      </div>
+    `;
+    sobre.addEventListener('click', () => abrir(m));
+    pared.appendChild(sobre);
+  });
+
+  function abrir(m){
+    modalTitulo.textContent = m.futuro ? m.titulo : `${m.titulo} · ${m.sub}`;
+    modalCaption.textContent = m.futuro ? 'Este todavía no llegó. Ojala venga con muchos recuerdos bonitos' : m.caption;
+
+    modalMedia.innerHTML = '';
+
+    const lista = (!m.futuro && m.media) ? m.media : [];
+
+    if(m.futuro){
+      const div = document.createElement('div');
+      div.className = 'media-wrap placeholder';
+      div.textContent = 'Todavía no llega este mes';
+      modalMedia.appendChild(div);
+    } else if(lista.length === 0){
+      const div = document.createElement('div');
+      div.className = 'media-wrap placeholder';
+      div.textContent = 'Falta poner la foto/video de este mes';
+      modalMedia.appendChild(div);
+    } else {
+      lista.forEach(item => {
+        const wrap = document.createElement('div');
+        wrap.className = 'media-wrap';
+
+        if(item.tipo === 'video'){
+          const v = document.createElement('video');
+          v.src = item.src; v.controls = true;
+          wrap.appendChild(v);
+        } else if(item.tipo === 'pdf'){
+          wrap.classList.add('pdf-card');
+          wrap.innerHTML = `
+            <div class="pdf-icono">📄</div>
+            <span class="pdf-nombre">${item.nombre || item.src.split('/').pop()}</span>
+            <a href="${item.src}" target="_blank" rel="noopener">Abrir PDF</a>
+          `;
+        } else {
+          const img = document.createElement('img');
+          img.src = item.src; img.alt = m.titulo;
+          img.onerror = () => {
+            wrap.classList.add('placeholder');
+            wrap.innerHTML = 'No se encontró el archivo:<br>' + item.src;
+          };
+          wrap.appendChild(img);
+        }
+        modalMedia.appendChild(wrap);
+      });
+    }
+
+    overlay.classList.add('activo');
+  }
+
+  document.getElementById('cerrar').addEventListener('click', () => overlay.classList.remove('activo'));
+  overlay.addEventListener('click', (e) => { if(e.target === overlay) overlay.classList.remove('activo'); });
+  document.addEventListener('keydown', (e) => { if(e.key === 'Escape') overlay.classList.remove('activo'); });
+</script>
+
+</body>
+</html>
