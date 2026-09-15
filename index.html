@@ -1,0 +1,3158 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuestros recuerdos</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,400;1,9..144,600&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#33202f;
+  --bg-deep:#241521;
+  --paper:#f8ecdf;
+  --gold:#d9ad6a;
+  --rose:#e0919c;
+  --rose-deep:#c46b7a;
+  --cream:#f5e9df;
+  --mauve:#ac8ba8;
+  --ink:#33202f;
+  --soft:#ead8cb;
+  --muted:#6b5866;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:radial-gradient(ellipse at top,var(--bg) 0%,var(--bg-deep) 70%);
+  color:var(--cream);
+  font-family:'Work Sans',sans-serif;
+  font-weight:300;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+button,
+input,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.stars{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background-image:
+    radial-gradient(1px 1px at 20% 30%,rgba(244,233,220,.5),transparent),
+    radial-gradient(1px 1px at 70% 15%,rgba(244,233,220,.4),transparent),
+    radial-gradient(1px 1px at 40% 70%,rgba(244,233,220,.35),transparent),
+    radial-gradient(1.5px 1.5px at 85% 60%,rgba(201,161,90,.5),transparent),
+    radial-gradient(1px 1px at 10% 85%,rgba(244,233,220,.3),transparent),
+    radial-gradient(1px 1px at 60% 45%,rgba(244,233,220,.4),transparent);
+  background-size:100% 100%;
+}
+
+/* INTRO */
+
+.intro{
+  position:fixed;
+  inset:0;
+  z-index:50;
+  background:var(--bg-deep);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  animation:intro-out .9s ease forwards;
+  animation-delay:2.15s;
+}
+
+.intro-heart path{
+  fill:none;
+  stroke:var(--rose);
+  stroke-width:2.4;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-dasharray:340;
+  stroke-dashoffset:340;
+  transform-origin:50% 55%;
+  filter:drop-shadow(0 0 10px rgba(224,145,156,.5));
+  animation:
+    draw-heart 1.3s ease forwards,
+    fill-heart .5s ease forwards 1.25s,
+    pulse-heart .5s ease forwards 1.75s;
+}
+
+@keyframes draw-heart{
+  to{stroke-dashoffset:0}
+}
+
+@keyframes fill-heart{
+  to{fill:var(--rose)}
+}
+
+@keyframes pulse-heart{
+  0%{transform:scale(1)}
+  55%{transform:scale(1.1)}
+  100%{transform:scale(1)}
+}
+
+@keyframes intro-out{
+  to{
+    opacity:0;
+    visibility:hidden;
+  }
+}
+
+.contenido{
+  opacity:0;
+  transform:translateY(10px);
+  animation:contenido-in 1s ease forwards;
+  animation-delay:2.35s;
+}
+
+@keyframes contenido-in{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.floating-hearts{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+.floating-hearts span{
+  position:absolute;
+  bottom:-8%;
+  font-size:1rem;
+  color:var(--rose);
+  opacity:0;
+  animation:float-up 16s linear infinite;
+}
+
+@keyframes float-up{
+  0%{
+    transform:translateY(0) scale(.75);
+    opacity:0;
+  }
+  12%{opacity:.32}
+  88%{opacity:.18}
+  100%{
+    transform:translateY(-108vh) scale(1.05);
+    opacity:0;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .intro{
+    display:none;
+  }
+
+  .contenido{
+    opacity:1;
+    transform:none;
+    animation:none;
+  }
+
+  .floating-hearts{
+    display:none;
+  }
+}
+
+/* GENERAL */
+
+main{
+  position:relative;
+  z-index:1;
+  max-width:920px;
+  margin:0 auto;
+  padding:8vh 6vw 12vh;
+}
+
+.hero{
+  text-align:center;
+  padding-bottom:9vh;
+  position:relative;
+}
+
+.hero::before{
+  content:'';
+  position:absolute;
+  top:-12%;
+  left:50%;
+  transform:translateX(-50%);
+  width:380px;
+  height:380px;
+  background:radial-gradient(circle,rgba(224,145,156,.32),transparent 68%);
+  filter:blur(38px);
+  z-index:-1;
+  pointer-events:none;
+}
+
+.eyebrow{
+  font-size:.85rem;
+  letter-spacing:.04em;
+  color:var(--rose);
+  margin-bottom:1.4rem;
+  font-weight:400;
+}
+
+h1{
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  font-weight:500;
+  font-size:clamp(2.8rem,9vw,5.2rem);
+  color:var(--paper);
+  line-height:1.05;
+  letter-spacing:-.01em;
+}
+
+.carta{
+  max-width:58ch;
+  margin:0 auto 11vh;
+  font-family:'Fraunces',serif;
+  font-weight:300;
+  font-size:1.18rem;
+  color:var(--cream);
+}
+
+.carta p{
+  margin-bottom:1.3rem;
+}
+
+.seccion-titulo{
+  text-align:center;
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  font-size:clamp(1.6rem,4vw,2.2rem);
+  color:var(--paper);
+  margin-bottom:1rem;
+}
+
+.seccion-subtitulo{
+  text-align:center;
+  color:var(--mauve);
+  font-size:.9rem;
+  margin-bottom:4rem;
+}
+
+/* SOBRES */
+
+.pared{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:2.2rem 1.6rem;
+}
+
+.sobre{
+  position:relative;
+  width:210px;
+  cursor:pointer;
+  perspective:1200px;
+}
+
+.sobre:nth-child(odd) .tapa-cerrada{
+  transform:rotate(-2.5deg);
+}
+
+.sobre:nth-child(even) .tapa-cerrada{
+  transform:rotate(2deg);
+}
+
+.sobre:nth-child(3n) .tapa-cerrada{
+  transform:rotate(-1deg);
+}
+
+.tapa-cerrada{
+  background:var(--paper);
+  color:var(--ink);
+  border-radius:3px;
+  padding:1.8rem 1.2rem 1.6rem;
+  box-shadow:0 14px 26px -12px rgba(0,0,0,.55);
+  transition:transform .35s ease,box-shadow .35s ease;
+  text-align:center;
+  min-height:155px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.sobre:hover .tapa-cerrada{
+  transform:translateY(-6px) rotate(0deg)!important;
+  box-shadow:0 20px 34px -14px rgba(0,0,0,.6);
+}
+
+.sello{
+  width:34px;
+  height:34px;
+  margin:0 auto .9rem;
+  border-radius:50%;
+  background:var(--rose);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  color:var(--paper);
+  font-size:1rem;
+}
+
+.mes-label{
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  font-size:1.25rem;
+  margin-bottom:.3rem;
+}
+
+.mes-sub{
+  font-size:.78rem;
+  color:#6b5866;
+  letter-spacing:.02em;
+}
+
+.sobre.futuro .tapa-cerrada{
+  background:transparent;
+  border:1.5px dashed rgba(244,233,220,.35);
+  box-shadow:none;
+}
+
+.sobre.futuro .mes-label,
+.sobre.futuro .mes-sub{
+  color:var(--mauve);
+}
+
+.sobre.futuro .sello{
+  background:transparent;
+  border:1.5px dashed rgba(244,233,220,.4);
+  color:var(--mauve);
+}
+
+.sobre.futuro:hover .tapa-cerrada{
+  transform:translateY(-3px) rotate(0deg)!important;
+}
+
+.sobre.actual .tapa-cerrada{
+  box-shadow:
+    0 0 0 1px rgba(217,173,106,.5),
+    0 18px 38px -14px rgba(0,0,0,.65);
+}
+
+.sobre.actual .sello{
+  background:var(--gold);
+}
+
+.sobre.sin-contenido .sello{
+  background:transparent;
+  border:1px solid rgba(196,107,122,.6);
+  color:var(--rose-deep);
+}
+
+/* BADGE */
+
+.estado-mes{
+  margin-top:.8rem;
+  font-size:.68rem;
+  color:#8a7380;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+
+/* CIERRE */
+
+.cierre{
+  text-align:center;
+  margin-top:12vh;
+  max-width:50ch;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.cierre .firma-final{
+  margin-top:1.6rem;
+  color:var(--gold);
+  font-size:1.1rem;
+}
+
+/* OVERLAY */
+
+.overlay{
+  position:fixed;
+  inset:0;
+  z-index:20;
+  background:rgba(15,8,17,.82);
+  backdrop-filter:blur(3px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:6vw;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .3s ease;
+}
+
+.overlay.activo{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.tarjeta-abierta{
+  background:var(--paper);
+  color:var(--ink);
+  max-width:560px;
+  width:100%;
+  border-radius:4px;
+  padding:2.2rem 2rem 2rem;
+  position:relative;
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.6);
+  transform:scale(.92);
+  transition:transform .3s ease;
+  max-height:90vh;
+  overflow-y:auto;
+}
+
+.overlay.activo .tarjeta-abierta{
+  transform:scale(1);
+}
+
+.cerrar{
+  position:absolute;
+  top:.9rem;
+  right:1.1rem;
+  background:none;
+  border:none;
+  font-size:1.4rem;
+  color:#6b5866;
+  cursor:pointer;
+  line-height:1;
+  z-index:3;
+}
+
+.cerrar:hover{
+  color:var(--rose-deep);
+}
+
+.tarjeta-abierta .mes-label{
+  font-size:1.5rem;
+  margin-bottom:1.2rem;
+  padding-right:2rem;
+}
+
+.modal-sub{
+  color:#806b78;
+  font-size:.82rem;
+  margin-top:-.8rem;
+  margin-bottom:1.4rem;
+}
+
+.media-wrap{
+  width:100%;
+  border-radius:3px;
+  overflow:hidden;
+  background:#ddd0c4;
+  margin-bottom:.8rem;
+  max-height:60vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.media-wrap img,
+.media-wrap video{
+  width:100%;
+  height:100%;
+  max-height:60vh;
+  object-fit:contain;
+  display:block;
+}
+
+.media-wrap.placeholder{
+  color:#a0907a;
+  font-size:.85rem;
+  font-family:'Work Sans',sans-serif;
+  text-align:center;
+  padding:1rem;
+  aspect-ratio:4/3;
+}
+
+.media-wrap.pdf-card{
+  aspect-ratio:auto;
+  padding:1.6rem 1.2rem;
+  flex-direction:column;
+  gap:.6rem;
+}
+
+.pdf-icono{
+  font-size:1.8rem;
+}
+
+.media-wrap.pdf-card a{
+  display:inline-block;
+  margin-top:.3rem;
+  padding:.55rem 1.3rem;
+  background:var(--rose-deep);
+  color:var(--paper);
+  text-decoration:none;
+  border-radius:999px;
+  font-size:.85rem;
+}
+
+.pdf-nombre{
+  font-size:.8rem;
+  color:#6b5866;
+}
+
+.caption{
+  font-size:.98rem;
+  color:#4a3d47;
+  margin-top:1rem;
+  white-space:pre-wrap;
+}
+
+.cargando{
+  text-align:center;
+  padding:1.5rem;
+  color:#806b78;
+}
+
+.sin-recuerdos{
+  padding:1.4rem;
+  border:1px dashed rgba(107,88,102,.35);
+  text-align:center;
+  color:#806b78;
+  margin-bottom:1rem;
+}
+
+/* RECUERDOS */
+
+.recuerdos-titulo{
+  font-family:'Fraunces',serif;
+  font-style:italic;
+  font-size:1.25rem;
+  margin:1.7rem 0 .8rem;
+  color:#4a3d47;
+}
+
+.recuerdo{
+  background:rgba(255,255,255,.45);
+  border:1px solid rgba(107,88,102,.13);
+  border-radius:8px;
+  padding:1rem;
+  margin-bottom:1rem;
+}
+
+.recuerdo-meta{
+  display:flex;
+  justify-content:space-between;
+  gap:1rem;
+  flex-wrap:wrap;
+  font-size:.72rem;
+  color:#806b78;
+  margin-bottom:.65rem;
+}
+
+.recuerdo-nombre{
+  color:var(--rose-deep);
+  font-weight:500;
+}
+
+.recuerdo-descripcion{
+  font-size:.9rem;
+  color:#4a3d47;
+  white-space:pre-wrap;
+  margin-bottom:.8rem;
+}
+
+.recuerdo-fotos{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:.45rem;
+}
+
+.recuerdo-fotos img{
+  width:100%;
+  aspect-ratio:1;
+  object-fit:cover;
+  border-radius:4px;
+  cursor:pointer;
+}
+
+.recuerdo-acciones{
+  display:flex;
+  justify-content:flex-end;
+  gap:.45rem;
+  margin-top:.7rem;
+}
+
+.btn-mini{
+  border:none;
+  background:transparent;
+  color:#806b78;
+  font-size:.72rem;
+  padding:.3rem .45rem;
+}
+
+.btn-mini:hover{
+  color:var(--rose-deep);
+}
+
+/* FORMULARIO */
+
+.btn-agregar{
+  width:100%;
+  border:none;
+  border-radius:999px;
+  background:var(--rose-deep);
+  color:var(--paper);
+  padding:.75rem 1rem;
+  margin-top:1rem;
+  transition:background .2s ease,transform .2s ease;
+}
+
+.btn-agregar:hover{
+  background:var(--rose);
+  transform:translateY(-1px);
+}
+
+.btn-agregar:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+  transform:none;
+}
+
+.form-recuerdo{
+  display:none;
+  margin-top:1rem;
+  padding:1rem;
+  border-radius:8px;
+  background:rgba(255,255,255,.48);
+  border:1px solid rgba(107,88,102,.15);
+}
+
+.form-recuerdo.visible{
+  display:block;
+}
+
+.form-grupo{
+  margin-bottom:.8rem;
+}
+
+.form-grupo label{
+  display:block;
+  font-size:.72rem;
+  color:#806b78;
+  margin-bottom:.3rem;
+}
+
+.form-grupo input,
+.form-grupo textarea{
+  width:100%;
+  border:1px solid rgba(107,88,102,.22);
+  border-radius:5px;
+  background:rgba(255,255,255,.7);
+  color:var(--ink);
+  padding:.65rem .7rem;
+  outline:none;
+}
+
+.form-grupo textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
+.form-grupo input:focus,
+.form-grupo textarea:focus{
+  border-color:var(--rose);
+}
+
+.form-fotos{
+  border:1px dashed rgba(107,88,102,.35);
+  padding:.8rem;
+  border-radius:6px;
+  font-size:.75rem;
+  color:#806b78;
+}
+
+.form-botones{
+  display:flex;
+  gap:.5rem;
+  margin-top:.8rem;
+}
+
+.btn-guardar{
+  flex:1;
+  border:none;
+  border-radius:999px;
+  background:var(--rose-deep);
+  color:var(--paper);
+  padding:.65rem;
+}
+
+.btn-cancelar{
+  border:none;
+  border-radius:999px;
+  background:transparent;
+  color:#806b78;
+  padding:.65rem 1rem;
+}
+
+.progreso-subida{
+  display:none;
+  margin-top:.7rem;
+  font-size:.75rem;
+  color:var(--rose-deep);
+  text-align:center;
+}
+
+.progreso-subida.visible{
+  display:block;
+}
+
+/* STATUS */
+
+.estado-conexion{
+  position:fixed;
+  bottom:12px;
+  right:12px;
+  z-index:30;
+  font-size:.65rem;
+  color:rgba(245,233,223,.5);
+  background:rgba(36,21,33,.75);
+  padding:.35rem .6rem;
+  border-radius:999px;
+  pointer-events:none;
+}
+
+.estado-conexion.ok{
+  color:rgba(217,173,106,.8);
+}
+
+.estado-conexion.error{
+  color:#e0919c;
+}
+
+/* LIGHTBOX */
+
+.lightbox{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:rgba(10,5,10,.95);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:1rem;
+}
+
+.lightbox.visible{
+  display:flex;
+}
+
+.lightbox img{
+  max-width:95vw;
+  max-height:92vh;
+  object-fit:contain;
+}
+
+.lightbox-cerrar{
+  position:absolute;
+  top:1rem;
+  right:1.2rem;
+  color:white;
+  background:none;
+  border:none;
+  font-size:2rem;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:600px){
+
+  main{
+    padding:10vh 6vw 10vh;
+  }
+
+  .sobre{
+    width:42vw;
+    max-width:210px;
+  }
+
+  .tapa-cerrada{
+    min-height:145px;
+    padding:1.3rem .8rem;
+  }
+
+  .tarjeta-abierta{
+    padding:1.8rem 1.1rem 1.3rem;
+    max-height:92vh;
+  }
+
+  .recuerdo-fotos{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .media-wrap,
+  .media-wrap img,
+  .media-wrap video{
+    max-height:50vh;
+  }
+}
+
+@media(max-width:390px){
+
+  .sobre{
+    width:43vw;
+  }
+
+  .mes-label{
+    font-size:1.05rem;
+  }
+
+  .mes-sub{
+    font-size:.68rem;
+  }
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="intro" id="intro">
+  <svg class="intro-heart" viewBox="0 0 100 90" width="86" height="86" aria-hidden="true">
+    <path d="M50 82 C20 60,2 40,2 24 C2 8,16 2,28 2 C38 2,46 8,50 18 C54 8,62 2,72 2 C84 2,98 8,98 24 C98 40,80 60,50 82 Z"/>
+  </svg>
+</div>
+
+<div class="floating-hearts" aria-hidden="true">
+  <span style="left:6%;animation-delay:0s;">♥</span>
+  <span style="left:20%;animation-delay:4s;">♥</span>
+  <span style="left:36%;animation-delay:8s;">♥</span>
+  <span style="left:54%;animation-delay:2s;">♥</span>
+  <span style="left:70%;animation-delay:6s;">♥</span>
+  <span style="left:86%;animation-delay:10s;">♥</span>
+</div>
+
+<div class="stars"></div>
+
+<main class="contenido">
+
+  <section class="hero">
+    <div class="eyebrow" id="heroFecha">Desde el 3 de abril de 2026</div>
+    <h1 id="heroTitulo">Nuestros meses</h1>
+  </section>
+
+  <section class="carta">
+
+
+<p>Stefi 🧡,</p>
+
+<p>
+  Gracias por todos estos meses eligiéndonos. Es hermoso compartir juntos,
+  la paso demasiado bien y disfruto mucho.
+  Me encanta estar con vos y te elegiría mil veces más.
+</p>
+
+<p>
+  Te quiero mucho y no quiero que se pierdan todos los nuevos recuerdos
+  ni los que vienen, así que los puse acá.
+</p>
+
+<p>
+  Cada día que nos vemos me hace ser el más feliz. Cuando arranco el día al lado tuyo soy la persona con mas suerte del mundo y mi día ya es el mas lidno posible.
+</p>
+
+<p>Cada momento que compartimos lo quiero disfrutar y guardar para siempre</p>
+
+<p>
+  Y bueno tengo muchísimo más para escribir pero no la quiero hacer tan larga,
+  así que revisá los sobresitos.
+</p>
+
+<p>
+  <em>
+    Nuestro álbum queda abierto para cargarle todo lo que nos queda por vivir.
+  </em>
+</p>
+
+
+  </section>
+
+  <section>
+
+
+<p class="seccion-titulo">Nuestros recuerdos</p>
+
+<p class="seccion-subtitulo">
+  Cada sobre guarda un mes. Los próximos se van abriendo solos con el tiempo.
+</p>
+
+<div class="pared" id="pared"></div>
+
+
+  </section>
+
+  <section class="cierre">
+    <div class="firma-final">
+      Y que sean muchos recuerdos más 🤎
+    </div>
+  </section>
+
+</main>
+
+<!-- MODAL -->
+
+<div class="overlay" id="overlay">
+
+  <div class="tarjeta-abierta" id="tarjeta">
+
+
+<button class="cerrar" id="cerrar">✕</button>
+
+<div class="mes-label" id="modalTitulo"></div>
+
+<div class="modal-sub" id="modalSub"></div>
+
+<div id="modalMedia"></div>
+
+<div id="modalRecuerdos"></div>
+
+<button class="btn-agregar" id="btnAgregar">
+  + Agregar un recuerdo
+</button>
+
+<div class="form-recuerdo" id="formRecuerdo">
+
+  <div class="form-grupo">
+    <label for="recuerdoNombre">¿Quién lo agrega?</label>
+    <input
+      type="text"
+      id="recuerdoNombre"
+      placeholder="Tu nombre"
+      maxlength="40"
+    >
+  </div>
+
+  <div class="form-grupo">
+    <label for="recuerdoFecha">Fecha del recuerdo</label>
+    <input
+      type="date"
+      id="recuerdoFecha"
+    >
+  </div>
+
+  <div class="form-grupo">
+    <label for="recuerdoDescripcion">¿Qué pasó?</label>
+    <textarea
+      id="recuerdoDescripcion"
+      placeholder="Contá un poquito de este recuerdo..."
+      maxlength="1000"
+    ></textarea>
+  </div>
+
+  <div class="form-grupo">
+    <label for="recuerdoFotos">Fotos</label>
+
+    <div class="form-fotos">
+      <input
+        type="file"
+        id="recuerdoFotos"
+        accept="image/*"
+        multiple
+      >
+
+      <div style="margin-top:.4rem;">
+        Podés seleccionar varias fotos.
+      </div>
+    </div>
+  </div>
+
+  <div class="progreso-subida" id="progresoSubida">
+    Subiendo fotos...
+  </div>
+
+  <div class="form-botones">
+
+    <button
+      class="btn-cancelar"
+      id="btnCancelar"
+      type="button"
+    >
+      Cancelar
+    </button>
+
+    <button
+      class="btn-guardar"
+      id="btnGuardar"
+      type="button"
+    >
+      Guardar recuerdo
+    </button>
+
+  </div>
+
+</div>
+
+
+  </div>
+
+</div>
+
+<!-- LIGHTBOX -->
+
+<div class="lightbox" id="lightbox">
+
+  <button class="lightbox-cerrar" id="lightboxCerrar">
+    ✕
+  </button>
+
+  <img id="lightboxImagen" src="" alt="Foto">
+
+</div>
+
+<div class="estado-conexion" id="estadoConexion">
+  Conectando...
+</div>
+
+<script type="module">
+
+/* =========================================================
+   FIREBASE
+   ========================================================= */
+
+import { initializeApp }
+  from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+import {
+  getAuth,
+  signInAnonymously,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  deleteDoc,
+  doc,
+  updateDoc,
+  query,
+  where,
+  orderBy,
+  onSnapshot,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyA-PP0dDqTH5D02RxTo5KjZoNHYxEDjZqQ",
+
+  authDomain: "nuestro-ig.firebaseapp.com",
+
+  projectId: "nuestro-ig",
+
+  storageBucket: "nuestro-ig.firebasestorage.app",
+
+  messagingSenderId: "703207291311",
+
+  appId: "1:703207291311:web:0ccf5ead18e158e605175a"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+
+/* =========================================================
+   CLOUDINARY
+   ========================================================= */
+
+const CLOUDINARY_CLOUD_NAME = "daknclug";
+
+const CLOUDINARY_UPLOAD_PRESET = "nuestro-ig";
+
+
+/* =========================================================
+   CONFIGURACIÓN DEL ÁLBUM
+   ========================================================= */
+
+/*
+   ESTE ES EL ÚNICO DATO DE FECHA QUE NECESITA CONOCER
+   EL SISTEMA.
+
+   La relación empezó el 3 de abril de 2026.
+
+   Desde esa fecha se generan automáticamente todos
+   los meses.
+*/
+
+const FECHA_INICIO = new Date(2026, 3, 3);
+
+
+/*
+   Contenido original que ya tenías.
+
+   Los recuerdos nuevos se guardan aparte en Firebase.
+   Por eso estas fotos no se pierden.
+*/
+
+const contenidoOriginal = {
+
+  "2026-04": {
+
+    caption:
+      "Nuestros primeros desayunos y yo todavía estaba re tímido, no hay muchas fotos :(.",
+
+    media: [
+
+      {
+        tipo:"imagen",
+        src:"media/mes1.jpg"
+      },
+
+      {
+        tipo:"imagen",
+        src:"media/mes1_2.jpg"
+      }
+
+    ]
+
+  },
+
+
+  "2026-05": {
+
+    caption:
+      "Primeros paseitos y fuimos a ver juntos tremenda peli.",
+
+    media: [
+
+      {
+        tipo:"imagen",
+        src:"media/mes2.jpg"
+      },
+
+      {
+        tipo:"imagen",
+        src:"media/mes2_3.jpg"
+      },
+
+      {
+        tipo:"imagen",
+        src:"media/mes2_2.jpg"
+      }
+
+    ]
+
+  },
+
+
+  "2026-06": {
+
+    caption:
+      "Comimos tequeños, conocimos una cascada y más paseitos.",
+
+    media: [
+
+      {
+        tipo:"imagen",
+        src:"media/mes3.jpg"
+      },
+
+      {
+        tipo:"imagen",
+        src:"media/mes3_2.jpg"
+      },
+
+      {
+        tipo:"imagen",
+        src:"media/mes3_3.jpg"
+      }
+
+    ]
+
+  },
+
+
+  "2026-07": {
+
+    caption:
+      "Mes de festejos y primera vez tocando juntos.",
+
+    media: [
+
+      {
+        tipo:"imagen",
+        src:"media/mes4.jpg"
+      },
+
+      {
+        tipo:"video",
+        src:"media/mes4.mp4"
+      },
+
+      {
+        tipo:"imagen",
+        src:"media/mes4_2.jpg"
+      },
+
+      {
+        tipo:"imagen",
+        src:"media/mes4_3.jpg"
+      }
+
+    ]
+
+  },
+
+
+  "2026-08": {
+
+    caption:
+      "Tacos en la playa, tremenda cachoeira y ya empezamos a sonar bien.",
+
+    media: [
+
+      {
+        tipo:"imagen",
+        src:"media/mes5.jpg"
+      },
+
+      {
+        tipo:"imagen",
+        src:"media/mes5_4.jpg"
+      },
+
+      {
+        tipo:"video",
+        src:"media/mes5.mp4"
+      },
+
+      {
+        tipo:"imagen",
+        src:"media/mes5_2.jpg"
+      },
+
+      {
+        tipo:"imagen",
+        src:"media/mes5_3.jpg"
+      },
+
+      {
+        tipo:"imagen",
+        src:"media/mes5_5.jpg"
+      }
+
+    ]
+
+  },
+
+
+  "2026-09": {
+
+    caption:
+      "Entradas para ir juntos 👀",
+
+    media: [
+
+      {
+        tipo:"pdf",
+        src:"media/entradas.pdf",
+        nombre:"Entradas.pdf"
+      }
+
+    ]
+
+  }
+
+};
+
+
+/* =========================================================
+   MESES
+   ========================================================= */
+
+const nombresMeses = [
+
+  "Enero",
+  "Febrero",
+  "Marzo",
+  "Abril",
+  "Mayo",
+  "Junio",
+  "Julio",
+  "Agosto",
+  "Septiembre",
+  "Octubre",
+  "Noviembre",
+  "Diciembre"
+
+];
+
+
+function crearIdMes(fecha){
+
+  const año = fecha.getFullYear();
+
+  const mes = String(
+    fecha.getMonth() + 1
+  ).padStart(2,"0");
+
+  return `${año}-${mes}`;
+
+}
+
+
+function obtenerFechaMes(id){
+
+  const [año,mes] = id.split("-").map(Number);
+
+  return new Date(
+    año,
+    mes - 1,
+    1
+  );
+
+}
+
+
+function obtenerMesActual(){
+
+  const ahora = new Date();
+
+  return new Date(
+    ahora.getFullYear(),
+    ahora.getMonth(),
+    1
+  );
+
+}
+
+
+function mesesEntre(inicio, fin){
+
+  const resultado = [];
+
+  let cursor = new Date(
+    inicio.getFullYear(),
+    inicio.getMonth(),
+    1
+  );
+
+  const limite = new Date(
+    fin.getFullYear(),
+    fin.getMonth(),
+    1
+  );
+
+  while(cursor <= limite){
+
+    resultado.push(
+      crearIdMes(cursor)
+    );
+
+    cursor.setMonth(
+      cursor.getMonth() + 1
+    );
+
+  }
+
+  return resultado;
+
+}
+
+
+/*
+   Generamos desde abril de 2026 hasta dos meses
+   después del actual.
+
+   Ejemplo:
+   septiembre 2026 →
+   abril 2026 ... noviembre 2026
+
+   Cuando llegue octubre:
+   abril ... diciembre 2026
+
+   Cuando llegue enero de 2027:
+   abril 2026 ... marzo 2027
+
+   Los meses viejos nunca desaparecen.
+*/
+
+function obtenerMesesAlbum(){
+
+  const actual = obtenerMesActual();
+
+  const futuro = new Date(
+    actual.getFullYear(),
+    actual.getMonth() + 2,
+    1
+  );
+
+  return mesesEntre(
+    FECHA_INICIO,
+    futuro
+  );
+
+}
+
+
+function calcularNumeroMes(id){
+
+  const fecha = obtenerFechaMes(id);
+
+  return (
+    (fecha.getFullYear() - FECHA_INICIO.getFullYear()) * 12
+    +
+    (fecha.getMonth() - FECHA_INICIO.getMonth())
+    
+  );
+
+}
+
+
+/* =========================================================
+   ESTADO
+   ========================================================= */
+
+let usuarioFirebase = null;
+
+let mesAbierto = null;
+
+let recuerdosActuales = [];
+
+let cancelarListenerRecuerdos = null;
+
+
+/* =========================================================
+   ELEMENTOS
+   ========================================================= */
+
+const pared =
+  document.getElementById("pared");
+
+const overlay =
+  document.getElementById("overlay");
+
+const modalTitulo =
+  document.getElementById("modalTitulo");
+
+const modalSub =
+  document.getElementById("modalSub");
+
+const modalMedia =
+  document.getElementById("modalMedia");
+
+const modalRecuerdos =
+  document.getElementById("modalRecuerdos");
+
+const btnAgregar =
+  document.getElementById("btnAgregar");
+
+const formRecuerdo =
+  document.getElementById("formRecuerdo");
+
+const btnGuardar =
+  document.getElementById("btnGuardar");
+
+const btnCancelar =
+  document.getElementById("btnCancelar");
+
+const recuerdoNombre =
+  document.getElementById("recuerdoNombre");
+
+const recuerdoFecha =
+  document.getElementById("recuerdoFecha");
+
+const recuerdoDescripcion =
+  document.getElementById("recuerdoDescripcion");
+
+const recuerdoFotos =
+  document.getElementById("recuerdoFotos");
+
+const progresoSubida =
+  document.getElementById("progresoSubida");
+
+const estadoConexion =
+  document.getElementById("estadoConexion");
+
+
+/* =========================================================
+   FECHA INICIAL DEL FORMULARIO
+   ========================================================= */
+
+function ponerFechaHoy(){
+
+  const hoy = new Date();
+
+  const yyyy =
+    hoy.getFullYear();
+
+  const mm =
+    String(
+      hoy.getMonth()+1
+    ).padStart(2,"0");
+
+  const dd =
+    String(
+      hoy.getDate()
+    ).padStart(2,"0");
+
+  recuerdoFecha.value =
+    `${yyyy}-${mm}-${dd}`;
+
+}
+
+
+/* =========================================================
+   NOMBRE DEL USUARIO
+   ========================================================= */
+
+function obtenerNombreGuardado(){
+
+  return localStorage.getItem(
+    "nuestroIgNombre"
+  ) || "";
+
+}
+
+
+function pedirNombreSiHaceFalta(){
+
+  let nombre =
+    obtenerNombreGuardado();
+
+  if(!nombre){
+
+    nombre =
+      prompt(
+        "¿Cómo querés que aparezca tu nombre en los recuerdos?"
+      );
+
+    if(nombre){
+
+      nombre =
+        nombre.trim().slice(0,40);
+
+      if(nombre){
+
+        localStorage.setItem(
+          "nuestroIgNombre",
+          nombre
+        );
+
+      }
+
+    }
+
+  }
+
+  recuerdoNombre.value =
+    nombre || "";
+
+}
+
+
+/* =========================================================
+   AUTENTICACIÓN
+   ========================================================= */
+
+try{
+
+  await signInAnonymously(auth);
+
+}catch(error){
+
+  console.error(
+    "Error iniciando Firebase:",
+    error
+  );
+
+  estadoConexion.textContent =
+    "Error de conexión";
+
+  estadoConexion.classList.add(
+    "error"
+  );
+
+}
+
+
+/* =========================================================
+   AUTH STATE
+   ========================================================= */
+
+onAuthStateChanged(
+  auth,
+  usuario => {
+
+    if(usuario){
+
+      usuarioFirebase =
+        usuario;
+
+      estadoConexion.textContent =
+        "Álbum conectado";
+
+      estadoConexion.classList.add(
+        "ok"
+      );
+
+      renderizarMeses();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   RENDERIZAR SOBRES
+   ========================================================= */
+
+function renderizarMeses(){
+
+  pared.innerHTML = "";
+
+  const meses =
+    obtenerMesesAlbum();
+
+  const actual =
+    crearIdMes(
+      obtenerMesActual()
+    );
+
+  meses.forEach(
+    id => {
+
+      const fecha =
+        obtenerFechaMes(id);
+
+      const futuro =
+        id > actual;
+
+      const esActual =
+        id === actual;
+
+      const numero =
+        calcularNumeroMes(id);
+
+      const original =
+        contenidoOriginal[id];
+
+      const sobre =
+        document.createElement("div");
+
+      let clases =
+        "sobre";
+
+      if(futuro)
+        clases += " futuro";
+
+      if(esActual)
+        clases += " actual";
+
+      if(!original && !futuro)
+        clases += " sin-contenido";
+
+      sobre.className =
+        clases;
+
+
+      let sub;
+
+      if(esActual){
+
+        sub =
+          `Mes ${numero} · Este mes`;
+
+      }else if(futuro){
+
+        sub =
+          `Mes ${numero} · Todavía no llega`;
+
+      }else{
+
+        sub =
+          `Mes ${numero}`;
+
+      }
+
+
+      const sello =
+        futuro
+        ? "·"
+        : "♥";
+
+
+      sobre.innerHTML = `
+
+        <div class="tapa-cerrada">
+
+          <div class="sello">
+            ${sello}
+          </div>
+
+          <div class="mes-label">
+            ${nombresMeses[fecha.getMonth()]}
+          </div>
+
+          <div class="mes-sub">
+            ${sub}
+          </div>
+
+          <div class="estado-mes">
+            ${fecha.getFullYear()}
+          </div>
+
+        </div>
+
+      `;
+
+
+      sobre.addEventListener(
+        "click",
+        () => abrirMes(id)
+      );
+
+
+      pared.appendChild(
+        sobre
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   ABRIR MES
+   ========================================================= */
+
+function abrirMes(id){
+
+  mesAbierto =
+    id;
+
+  const fecha =
+    obtenerFechaMes(id);
+
+  const actual =
+    crearIdMes(
+      obtenerMesActual()
+    );
+
+  const futuro =
+    id > actual;
+
+  const numero =
+    calcularNumeroMes(id);
+
+  const nombre =
+    nombresMeses[
+      fecha.getMonth()
+    ];
+
+  modalTitulo.textContent =
+    nombre;
+
+
+  modalSub.textContent =
+    futuro
+    ? `Mes ${numero} · Todavía no llegó`
+    : `Mes ${numero} · ${fecha.getFullYear()}`;
+
+
+  modalMedia.innerHTML =
+    "";
+
+  modalRecuerdos.innerHTML =
+    "";
+
+  formRecuerdo.classList.remove(
+    "visible"
+  );
+
+
+  ponerMediaOriginal(id);
+
+
+  if(futuro){
+
+    btnAgregar.style.display =
+      "none";
+
+    formRecuerdo.classList.remove(
+      "visible"
+    );
+
+    const aviso =
+      document.createElement("div");
+
+    aviso.className =
+      "sin-recuerdos";
+
+    aviso.innerHTML =
+      "🔒<br><br>Este sobre todavía no se abrió.<br>Cuando llegue el mes, se va a desbloquear solo.";
+
+    modalRecuerdos.appendChild(
+      aviso
+    );
+
+  }else{
+
+    btnAgregar.style.display =
+      "block";
+
+    escucharRecuerdos(id);
+
+  }
+
+
+  overlay.classList.add(
+    "activo"
+  );
+
+}
+
+
+/* =========================================================
+   MEDIA ORIGINAL
+   ========================================================= */
+
+function ponerMediaOriginal(id){
+
+  const original =
+    contenidoOriginal[id];
+
+
+  if(
+    !original ||
+    !original.media ||
+    !original.media.length
+  ){
+
+    return;
+
+  }
+
+
+  original.media.forEach(
+    item => {
+
+      const wrap =
+        document.createElement("div");
+
+      wrap.className =
+        "media-wrap";
+
+
+      if(item.tipo === "video"){
+
+        const video =
+          document.createElement("video");
+
+        video.src =
+          item.src;
+
+        video.controls =
+          true;
+
+        wrap.appendChild(
+          video
+        );
+
+      }
+
+      else if(item.tipo === "pdf"){
+
+        wrap.classList.add(
+          "pdf-card"
+        );
+
+        const icon =
+          document.createElement("div");
+
+        icon.className =
+          "pdf-icono";
+
+        icon.textContent =
+          "📄";
+
+
+        const nombre =
+          document.createElement("span");
+
+        nombre.className =
+          "pdf-nombre";
+
+        nombre.textContent =
+          item.nombre ||
+          item.src.split("/").pop();
+
+
+        const link =
+          document.createElement("a");
+
+        link.href =
+          item.src;
+
+        link.target =
+          "_blank";
+
+        link.rel =
+          "noopener";
+
+        link.textContent =
+          "Abrir PDF";
+
+
+        wrap.appendChild(icon);
+        wrap.appendChild(nombre);
+        wrap.appendChild(link);
+
+      }
+
+      else{
+
+        const img =
+          document.createElement("img");
+
+        img.src =
+          item.src;
+
+        img.alt =
+          "Recuerdo";
+
+        img.addEventListener(
+          "click",
+          () => abrirLightbox(
+            item.src
+          )
+        );
+
+        img.onerror =
+          () => {
+
+            wrap.classList.add(
+              "placeholder"
+            );
+
+            wrap.textContent =
+              "No se encontró el archivo: " +
+              item.src;
+
+          };
+
+
+        wrap.appendChild(
+          img
+        );
+
+      }
+
+
+      modalMedia.appendChild(
+        wrap
+      );
+
+    }
+  );
+
+
+  if(original.caption){
+
+    const caption =
+      document.createElement("p");
+
+    caption.className =
+      "caption";
+
+    caption.textContent =
+      original.caption;
+
+    modalMedia.appendChild(
+      caption
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   FIRESTORE: ESCUCHAR RECUERDOS
+   ========================================================= */
+
+function escucharRecuerdos(id){
+
+  if(cancelarListenerRecuerdos){
+
+    cancelarListenerRecuerdos();
+
+    cancelarListenerRecuerdos =
+      null;
+
+  }
+
+
+  if(!usuarioFirebase){
+
+    modalRecuerdos.innerHTML =
+      '<div class="cargando">Conectando con Firebase...</div>';
+
+    return;
+
+  }
+
+
+  modalRecuerdos.innerHTML =
+    '<div class="cargando">Cargando recuerdos...</div>';
+
+
+  const referencia =
+    collection(
+      db,
+      "recuerdos"
+    );
+
+
+  const consulta =
+    query(
+
+      referencia,
+
+      where(
+        "mesId",
+        "==",
+        id
+      ),
+
+      orderBy(
+        "createdAt",
+        "asc"
+      )
+
+    );
+
+
+  cancelarListenerRecuerdos =
+    onSnapshot(
+
+      consulta,
+
+      snapshot => {
+
+        recuerdosActuales =
+          snapshot.docs.map(
+            documento => ({
+              id:
+                documento.id,
+              ...documento.data()
+            })
+          );
+
+
+        renderizarRecuerdos();
+
+      },
+
+      error => {
+
+        console.error(
+          "Error escuchando recuerdos:",
+          error
+        );
+
+        modalRecuerdos.innerHTML =
+          '<div class="sin-recuerdos">No pudimos cargar los recuerdos ahora.</div>';
+
+      }
+
+    );
+
+}
+
+
+/* =========================================================
+   RENDERIZAR RECUERDOS
+   ========================================================= */
+
+function renderizarRecuerdos(){
+
+  modalRecuerdos.innerHTML =
+    "";
+
+
+  const titulo =
+    document.createElement("div");
+
+  titulo.className =
+    "recuerdos-titulo";
+
+  titulo.textContent =
+    "Nuestros recuerdos";
+
+
+  modalRecuerdos.appendChild(
+    titulo
+  );
+
+
+  if(
+    !recuerdosActuales.length
+  ){
+
+    const vacio =
+      document.createElement("div");
+
+    vacio.className =
+      "sin-recuerdos";
+
+    vacio.textContent =
+      "Todavía no agregaron recuerdos a este mes.";
+
+    modalRecuerdos.appendChild(
+      vacio
+    );
+
+    return;
+
+  }
+
+
+  recuerdosActuales.forEach(
+    recuerdo => {
+
+      const tarjeta =
+        document.createElement("div");
+
+      tarjeta.className =
+        "recuerdo";
+
+
+      const meta =
+        document.createElement("div");
+
+      meta.className =
+        "recuerdo-meta";
+
+
+      const nombre =
+        document.createElement("span");
+
+      nombre.className =
+        "recuerdo-nombre";
+
+      nombre.textContent =
+        recuerdo.nombre ||
+        "Alguien";
+
+
+      const fecha =
+        document.createElement("span");
+
+      fecha.textContent =
+        formatearFecha(
+          recuerdo.fecha
+        );
+
+
+      meta.appendChild(
+        nombre
+      );
+
+      meta.appendChild(
+        fecha
+      );
+
+
+      tarjeta.appendChild(
+        meta
+      );
+
+
+      if(
+        recuerdo.descripcion
+      ){
+
+        const descripcion =
+          document.createElement("div");
+
+        descripcion.className =
+          "recuerdo-descripcion";
+
+        descripcion.textContent =
+          recuerdo.descripcion;
+
+        tarjeta.appendChild(
+          descripcion
+        );
+
+      }
+
+
+      if(
+        Array.isArray(
+          recuerdo.fotos
+        ) &&
+        recuerdo.fotos.length
+      ){
+
+        const fotos =
+          document.createElement("div");
+
+        fotos.className =
+          "recuerdo-fotos";
+
+
+        recuerdo.fotos.forEach(
+          foto => {
+
+            const img =
+              document.createElement("img");
+
+            img.src =
+              foto.url;
+
+            img.alt =
+              "Foto del recuerdo";
+
+            img.addEventListener(
+              "click",
+              () => abrirLightbox(
+                foto.url
+              )
+            );
+
+            fotos.appendChild(
+              img
+            );
+
+          }
+        );
+
+
+        tarjeta.appendChild(
+          fotos
+        );
+
+      }
+
+
+      const acciones =
+        document.createElement("div");
+
+      acciones.className =
+        "recuerdo-acciones";
+
+
+      const editar =
+        document.createElement("button");
+
+      editar.className =
+        "btn-mini";
+
+      editar.textContent =
+        "Editar";
+
+      editar.addEventListener(
+        "click",
+        () => editarRecuerdo(
+          recuerdo
+        )
+      );
+
+
+      const eliminar =
+        document.createElement("button");
+
+      eliminar.className =
+        "btn-mini";
+
+      eliminar.textContent =
+        "Eliminar";
+
+      eliminar.addEventListener(
+        "click",
+        () => eliminarRecuerdo(
+          recuerdo.id
+        )
+      );
+
+
+      acciones.appendChild(
+        editar
+      );
+
+      acciones.appendChild(
+        eliminar
+      );
+
+      tarjeta.appendChild(
+        acciones
+      );
+
+
+      modalRecuerdos.appendChild(
+        tarjeta
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   FORMULARIO
+   ========================================================= */
+
+btnAgregar.addEventListener(
+  "click",
+  () => {
+
+    pedirNombreSiHaceFalta();
+
+    ponerFechaHoy();
+
+    formRecuerdo.classList.add(
+      "visible"
+    );
+
+    btnAgregar.style.display =
+      "none";
+
+  }
+);
+
+
+btnCancelar.addEventListener(
+  "click",
+  cerrarFormulario
+);
+
+
+function cerrarFormulario(){
+
+  formRecuerdo.classList.remove(
+    "visible"
+  );
+
+  btnAgregar.style.display =
+    "block";
+
+  recuerdoDescripcion.value =
+    "";
+
+  recuerdoFotos.value =
+    "";
+
+}
+
+
+/* =========================================================
+   COMPRIMIR IMAGEN
+   ========================================================= */
+
+function comprimirImagen(
+  archivo
+){
+
+  return new Promise(
+    (resolve,reject) => {
+
+      const lector =
+        new FileReader();
+
+
+      lector.onload =
+        event => {
+
+          const img =
+            new Image();
+
+
+          img.onload =
+            () => {
+
+              const MAX =
+                1800;
+
+              let ancho =
+                img.width;
+
+              let alto =
+                img.height;
+
+
+              if(
+                ancho > MAX ||
+                alto > MAX
+              ){
+
+                if(ancho > alto){
+
+                  alto =
+                    alto *
+                    MAX /
+                    ancho;
+
+                  ancho =
+                    MAX;
+
+                }else{
+
+                  ancho =
+                    ancho *
+                    MAX /
+                    alto;
+
+                  alto =
+                    MAX;
+
+                }
+
+              }
+
+
+              const canvas =
+                document.createElement(
+                  "canvas"
+                );
+
+              canvas.width =
+                Math.round(ancho);
+
+              canvas.height =
+                Math.round(alto);
+
+
+              const contexto =
+                canvas.getContext(
+                  "2d"
+                );
+
+
+              contexto.drawImage(
+                img,
+                0,
+                0,
+                canvas.width,
+                canvas.height
+              );
+
+
+              canvas.toBlob(
+                blob => {
+
+                  if(blob){
+
+                    resolve(
+                      blob
+                    );
+
+                  }else{
+
+                    reject(
+                      new Error(
+                        "No se pudo comprimir la imagen"
+                      )
+                    );
+
+                  }
+
+                },
+                "image/jpeg",
+                .85
+              );
+
+            };
+
+
+          img.onerror =
+            reject;
+
+          img.src =
+            event.target.result;
+
+        };
+
+
+      lector.onerror =
+        reject;
+
+      lector.readAsDataURL(
+        archivo
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   SUBIR A CLOUDINARY
+   ========================================================= */
+
+async function subirCloudinary(
+  archivo
+){
+
+  const imagen =
+    await comprimirImagen(
+      archivo
+    );
+
+
+  const datos =
+    new FormData();
+
+
+  datos.append(
+    "file",
+    imagen,
+    archivo.name
+  );
+
+
+  datos.append(
+    "upload_preset",
+    CLOUDINARY_UPLOAD_PRESET
+  );
+
+
+  const respuesta =
+    await fetch(
+
+      `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
+
+      {
+        method:"POST",
+        body:datos
+      }
+
+    );
+
+
+  if(
+    !respuesta.ok
+  ){
+
+    const texto =
+      await respuesta.text();
+
+    console.error(
+      "Cloudinary:",
+      texto
+    );
+
+    throw new Error(
+      "Cloudinary rechazó la foto"
+    );
+
+  }
+
+
+  const resultado =
+    await respuesta.json();
+
+
+  return {
+
+    url:
+      resultado.secure_url,
+
+    publicId:
+      resultado.public_id || null
+
+  };
+
+}
+
+
+/* =========================================================
+   GUARDAR RECUERDO
+   ========================================================= */
+
+btnGuardar.addEventListener(
+  "click",
+  guardarRecuerdo
+);
+
+
+async function guardarRecuerdo(){
+
+  if(!usuarioFirebase){
+
+    alert(
+      "Todavía estamos conectando con Firebase. Esperá unos segundos y probá de nuevo."
+    );
+
+    return;
+
+  }
+
+
+  if(!mesAbierto){
+
+    return;
+
+  }
+
+
+  const nombre =
+    recuerdoNombre.value
+      .trim()
+      .slice(0,40);
+
+
+  const fecha =
+    recuerdoFecha.value;
+
+
+  const descripcion =
+    recuerdoDescripcion.value
+      .trim()
+      .slice(0,1000);
+
+
+  const archivos =
+    Array.from(
+      recuerdoFotos.files || []
+    );
+
+
+  if(!nombre){
+
+    alert(
+      "Poné tu nombre antes de guardar el recuerdo."
+    );
+
+    recuerdoNombre.focus();
+
+    return;
+
+  }
+
+
+  if(!fecha){
+
+    alert(
+      "Elegí una fecha."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !descripcion &&
+    archivos.length === 0
+  ){
+
+    alert(
+      "Agregá una descripción o al menos una foto."
+    );
+
+    return;
+
+  }
+
+
+  btnGuardar.disabled =
+    true;
+
+  btnCancelar.disabled =
+    true;
+
+  progresoSubida.classList.add(
+    "visible"
+  );
+
+
+  try{
+
+    const fotos = [];
+
+
+    for(
+      let i=0;
+      i<archivos.length;
+      i++
+    ){
+
+      progresoSubida.textContent =
+        `Subiendo foto ${i+1} de ${archivos.length}...`;
+
+
+      const foto =
+        await subirCloudinary(
+          archivos[i]
+        );
+
+
+      fotos.push(
+        foto
+      );
+
+    }
+
+
+    progresoSubida.textContent =
+      "Guardando recuerdo...";
+
+
+    await addDoc(
+
+      collection(
+        db,
+        "recuerdos"
+      ),
+
+      {
+
+        mesId:
+          mesAbierto,
+
+        mesTitulo:
+          nombresMeses[
+            obtenerFechaMes(
+              mesAbierto
+            ).getMonth()
+          ],
+
+        nombre,
+
+        fecha,
+
+        descripcion,
+
+        fotos,
+
+        uid:
+          usuarioFirebase.uid,
+
+        createdAt:
+          serverTimestamp(),
+
+        updatedAt:
+          serverTimestamp()
+
+      }
+
+    );
+
+
+    localStorage.setItem(
+      "nuestroIgNombre",
+      nombre
+    );
+
+
+    alert(
+      "Recuerdo guardado ❤️"
+    );
+
+
+    cerrarFormulario();
+
+
+  }catch(error){
+
+    console.error(
+      "Error guardando recuerdo:",
+      error
+    );
+
+
+    alert(
+      "No pudimos guardar el recuerdo. Revisá tu conexión e intentá de nuevo."
+    );
+
+  }finally{
+
+    btnGuardar.disabled =
+      false;
+
+    btnCancelar.disabled =
+      false;
+
+    progresoSubida.classList.remove(
+      "visible"
+    );
+
+    progresoSubida.textContent =
+      "Subiendo fotos...";
+
+  }
+
+}
+
+
+/* =========================================================
+   EDITAR RECUERDO
+   ========================================================= */
+
+async function editarRecuerdo(
+  recuerdo
+){
+
+  const nuevaDescripcion =
+    prompt(
+      "Editá la descripción del recuerdo:",
+      recuerdo.descripcion || ""
+    );
+
+
+  if(nuevaDescripcion === null){
+
+    return;
+
+  }
+
+
+  try{
+
+    await updateDoc(
+
+      doc(
+        db,
+        "recuerdos",
+        recuerdo.id
+      ),
+
+      {
+
+        descripcion:
+          nuevaDescripcion
+            .trim()
+            .slice(0,1000),
+
+        updatedAt:
+          serverTimestamp()
+
+      }
+
+    );
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+    alert(
+      "No se pudo editar el recuerdo."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   ELIMINAR RECUERDO
+   ========================================================= */
+
+async function eliminarRecuerdo(
+  id
+){
+
+  const confirmar =
+    confirm(
+      "¿Querés eliminar este recuerdo?"
+    );
+
+
+  if(!confirmar){
+
+    return;
+
+  }
+
+
+  try{
+
+    await deleteDoc(
+
+      doc(
+        db,
+        "recuerdos",
+        id
+      )
+
+    );
+
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+    alert(
+      "No se pudo eliminar el recuerdo."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   FECHAS
+   ========================================================= */
+
+function formatearFecha(
+  fecha
+){
+
+  if(!fecha)
+    return "";
+
+  const partes =
+    fecha.split("-");
+
+  if(
+    partes.length !== 3
+  ){
+
+    return fecha;
+
+  }
+
+  return `${partes[2]}/${partes[1]}/${partes[0]}`;
+
+}
+
+
+/* =========================================================
+   CERRAR MODAL
+   ========================================================= */
+
+document
+  .getElementById("cerrar")
+  .addEventListener(
+    "click",
+    cerrarModal
+  );
+
+
+overlay.addEventListener(
+  "click",
+  event => {
+
+    if(
+      event.target === overlay
+    ){
+
+      cerrarModal();
+
+    }
+
+  }
+);
+
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if(
+      event.key === "Escape"
+    ){
+
+      cerrarModal();
+
+    }
+
+  }
+);
+
+
+function cerrarModal(){
+
+  overlay.classList.remove(
+    "activo"
+  );
+
+
+  if(
+    cancelarListenerRecuerdos
+  ){
+
+    cancelarListenerRecuerdos();
+
+    cancelarListenerRecuerdos =
+      null;
+
+  }
+
+
+  mesAbierto =
+    null;
+
+}
+
+
+/* =========================================================
+   LIGHTBOX
+   ========================================================= */
+
+const lightbox =
+  document.getElementById(
+    "lightbox"
+  );
+
+const lightboxImagen =
+  document.getElementById(
+    "lightboxImagen"
+  );
+
+const lightboxCerrar =
+  document.getElementById(
+    "lightboxCerrar"
+  );
+
+
+function abrirLightbox(
+  url
+){
+
+  lightboxImagen.src =
+    url;
+
+  lightbox.classList.add(
+    "visible"
+  );
+
+}
+
+
+function cerrarLightbox(){
+
+  lightbox.classList.remove(
+    "visible"
+  );
+
+  lightboxImagen.src =
+    "";
+
+}
+
+
+lightboxCerrar.addEventListener(
+  "click",
+  cerrarLightbox
+);
+
+
+lightbox.addEventListener(
+  "click",
+  event => {
+
+    if(
+      event.target === lightbox
+    ){
+
+      cerrarLightbox();
+
+    }
+
+  }
+);
+
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if(
+      event.key === "Escape"
+    ){
+
+      cerrarLightbox();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   HERO DINÁMICO
+   ========================================================= */
+
+function actualizarHero(){
+
+  const actual =
+    obtenerMesActual();
+
+
+  const numero =
+    calcularNumeroMes(
+      crearIdMes(actual)
+    );
+
+
+  document.getElementById(
+    "heroFecha"
+  ).textContent =
+    "Desde el 3 de abril de 2026";
+
+
+  document.getElementById(
+    "heroTitulo"
+  ).textContent =
+    `${numero} meses juntos`;
+
+}
+
+
+/* =========================================================
+   INICIO
+   ========================================================= */
+
+actualizarHero();
+
+ponerFechaHoy();
+
+pedirNombreSiHaceFalta();
+
+renderizarMeses();
+
+
+</script>
+
+</body>
+</html>
